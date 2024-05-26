@@ -31,7 +31,7 @@ public class OrderService {
                 .price(order.getPrice())
                 .build();
 
-        Payment paymentResponse = restTemplate.postForObject(paymentUrl, payment, Payment.class);
+        Payment paymentResponse = restTemplate.postForObject("http://payment-service/payment/processPayment", payment, Payment.class);
         orderRepository.save(order);
         return TransactionResponse.builder()
                 .order(order)
